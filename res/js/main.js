@@ -19,10 +19,19 @@ class Player {
         if (keys["s"]) this.y += this.v;
         if (keys["a"]) this.x -= this.v;
         if (keys["d"]) this.x += this.v;
+        if (keys[" "]) {
+            this.w--;
+            this.h--;
+        }
+        if (keys["k"]) {
+            this.v=20;
+        } else{
+            this.v = 5;
+        }
     }
 }
 
-const myPlayer = new Player(10, 10, 50, 50, "red", 5);
+const myPlayer = new Player(10, 10, 50, 50, "limegreen", 5);
 
 
 const canvas = document.getElementById("canvas");
@@ -40,19 +49,13 @@ let keys = {};
 
 window.addEventListener("keydown", (w) => keys[w.key] = true);
 window.addEventListener("keyup", (w) => keys[w.key] = false);
-window.addEventListener("keydown", (s) => keys[s.key] = true);
-window.addEventListener("keyup", (s) => keys[s.key] = false);
-window.addEventListener("keydown", (a) => keys[a.key] = true);
-window.addEventListener("keyup", (a) => keys[a.key] = false);
-window.addEventListener("keydown", (d) => keys[d.key] = true);
-window.addEventListener("keyup", (d) => keys[d.key] = false);
 
 
 
 const gameLoop = () => {
     myPlayer.update(keys);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    //console.log(keys);
+    console.log(keys);
     myPlayer.draw(ctx);
     requestAnimationFrame(gameLoop);
 }
